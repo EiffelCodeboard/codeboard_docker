@@ -31,7 +31,8 @@ CPU_TIME_SYSTEM=$(echo $CPU_TIME_STRING | cut -d ';' -f 2)
 exec 3>&- 4>&-;
 
 if [ $(echo "$CPU_TIME_USER + $CPU_TIME_SYSTEM + 0.1 >= $TIMEOUT_CPU" | bc) -eq 1 ]; then
-   echo -e "\n\nCodeboard terminated your program because it exceeded the CPU usage limit.\n"
+   #echo -e "\n\nCodeboard terminated your program because it exceeded the CPU usage limit.\n"
+   echo -e "\n\nCodeboard terminated your program because it exceeded the CPU usage limit ($(echo "$CPU_TIME_USER + $CPU_TIME_SYSTEM + 0.1 " | bc) > TIMEOUT_CPU=$TIMEOUT_CPU).\n"
 fi;
 
 kill $forkedPID
